@@ -1,17 +1,25 @@
 /**
- * HelloApp.java - A simple Java application that displays "Hello, World!"
- * * This demonstrates fundamental Java concepts such as class declaration, 
- * the main method, and standard output.
+ * HelloApp.java - A simple Java application
  *
- * @author Developer
- * @version 1.0
+ * UC 2: Display User Name - The application should accept a user's name as 
+ * a command-line argument and display a personalized greeting.
+ *
+ * @version 2.0
  */
 public class HelloApp {
     
-    // The main method serves as the entry point for program execution
     public static void main(String[] args) {
         
-        // Prints the specified message followed by a newline character
-        System.out.println("Hello, World!");
+        // Check if at least one command-line argument was provided
+        if (args.length > 0) {
+            // Get the first command-line argument
+            String name = args[0];
+            
+            // Display personalized greeting using String concatenation (+)
+            System.out.println("Hello, " + name + "!");
+        } else {
+            // Default fallback message if no arguments are passed
+            System.out.println("Hello, World!");
+        }
     }
 }
