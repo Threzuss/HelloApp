@@ -3,15 +3,19 @@ import java.util.HashMap;
 /**
  * HelloApp.java - A simple Java application
  *
- * UC 6: Display Banner Dynamically for Input Name
- * The app accepts a user's name via command-line argument and displays 
- * a personalized banner greeting using a HashMap for character patterns.
+ * UC 7: Using Constants for Banner Content
+ * The app refactors the application to use a constant for the default 
+ * greeting message, avoiding hardcoded values and improving maintainability.
  *
- * @version 6.0
+ * @version 7.0
  */
 public class HelloApp {
 
-    // 1. Method to create and populate the HashMap
+    // 1. Define the constant at the class level.
+    // 'public' so it's accessible, 'static' so it belongs to the class, 
+    // and 'final' so its value can never be changed.
+    public static final String DEFAULT_GREETING = "HELLO";
+
     public static HashMap<Character, String[]> createCharacterMap() {
         HashMap<Character, String[]> charMap = new HashMap<>();
 
@@ -36,7 +40,6 @@ public class HelloApp {
         return charMap;
     }
 
-    // 2. Method to display the banner
     public static void displayBanner(String message, HashMap<Character, String[]> charMap) {
         int patternHeight = 5; 
 
@@ -44,7 +47,6 @@ public class HelloApp {
             StringBuilder sb = new StringBuilder();
             
             for (char ch : message.toCharArray()) {
-                // Fetch the pattern, default to space if character isn't in the map
                 String[] pattern = charMap.getOrDefault(ch, charMap.get(' '));
                 sb.append(pattern[line]).append("  "); 
             }
@@ -52,21 +54,17 @@ public class HelloApp {
         }
     }
 
-    // 3. Main execution method
     public static void main(String[] args) {
         
-        // Initialize default name
         String name = "WORLD";
         
-        // Check for command-line arguments and update name if present
         if (args.length > 0) {
             name = args[0].toUpperCase();
         }
         
-        // Construct the final message
-        String message = "HELLO " + name;
+        // 2. Use the constant instead of a hardcoded string
+        String message = DEFAULT_GREETING + " " + name;
         
-        // Load the map and render the banner
         HashMap<Character, String[]> charMap = createCharacterMap();
         displayBanner(message, charMap);
     }
